@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Ionic.XPathVisualizer</RootNamespace>
     <AssemblyName>Ionic.XPathVisualizer</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ApplicationIcon>icon1.ico</ApplicationIcon>
     <SccProjectName>SAK</SccProjectName>
@@ -36,6 +36,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -46,6 +47,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -55,6 +57,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Ionic.Xml.XhtmlResolver, Version=1.1.1.1, Culture=neutral, processorArchitecture=MSIL">
@@ -75,7 +78,6 @@
   <ItemGroup>
     <Compile Include="Extensions.cs" />
     <Compile Include="RtbLineCalculator.cs" />
-    <Compile Include="Tuple.cs" />
     <Compile Include="XPathVisualizerTool.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -127,6 +129,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -195,11 +198,6 @@
   </ItemGroup>
   <Target Name="CheckSyntax" DependsOnTargets="ResolveAssemblyReferences">
     <!-- Run the Visual C# compilation on the specified set of .cs files. -->
-    <CSC Sources="@(CSFile)"
-         References="@(ReferencePath)"
-         TargetType="module"
-         Toolpath="$(MSBuildToolsPath)"
-         OutputAssembly="%(ExcludedCSFile.Filename)_flymake.netmodule"
-         Nologo="true" />
+    <CSC Sources="@(CSFile)" References="@(ReferencePath)" TargetType="module" Toolpath="$(MSBuildToolsPath)" OutputAssembly="%(ExcludedCSFile.Filename)_flymake.netmodule" Nologo="true" />
   </Target>
 </Project>
