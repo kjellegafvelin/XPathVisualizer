@@ -56,8 +56,6 @@
             this.tsmiFind = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiFindAndReplace = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
-            this.btnExpandCollapse = new System.Windows.Forms.Button();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.pnlInput = new System.Windows.Forms.Panel();
             this.tbXmlns = new System.Windows.Forms.TextBox();
@@ -72,15 +70,15 @@
             this.customTabControl1 = new Ionic.WinForms.CustomTabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.richTextBox1 = new Ionic.WinForms.RichTextBoxEx();
-            this.timerMenu = new System.Windows.Forms.Timer(this.components);
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.progressBar1 = new System.Windows.Forms.ToolStripProgressBar();
-            this.linkToCodeplex = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.mnuXpathMru = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
@@ -103,8 +101,6 @@
             this.menuStrip1.Size = new System.Drawing.Size(538, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
-            this.menuStrip1.MenuActivate += new System.EventHandler(this.menuStrip1_MenuActivate);
-            this.menuStrip1.MenuDeactivate += new System.EventHandler(this.menuStrip1_MenuDeactivate);
             // 
             // tsmiFile
             // 
@@ -123,26 +119,25 @@
             this.tsmiFile.Size = new System.Drawing.Size(37, 20);
             this.tsmiFile.Text = "&File";
             this.tsmiFile.DropDownOpening += new System.EventHandler(this.tsmiFile_Opening);
-            this.tsmiFile.DropDownOpened += new System.EventHandler(this.AnyDropDownOpened);
             // 
             // tsmiNew
             // 
             this.tsmiNew.Image = ((System.Drawing.Image)(resources.GetObject("tsmiNew.Image")));
             this.tsmiNew.Name = "tsmiNew";
-            this.tsmiNew.Size = new System.Drawing.Size(152, 22);
+            this.tsmiNew.Size = new System.Drawing.Size(142, 22);
             this.tsmiNew.Text = "&New";
             this.tsmiNew.Click += new System.EventHandler(this.tsmiNew_Click);
             // 
             // separator1
             // 
             this.separator1.Name = "separator1";
-            this.separator1.Size = new System.Drawing.Size(149, 6);
+            this.separator1.Size = new System.Drawing.Size(139, 6);
             // 
             // tsmiOpen
             // 
             this.tsmiOpen.Image = ((System.Drawing.Image)(resources.GetObject("tsmiOpen.Image")));
             this.tsmiOpen.Name = "tsmiOpen";
-            this.tsmiOpen.Size = new System.Drawing.Size(152, 22);
+            this.tsmiOpen.Size = new System.Drawing.Size(142, 22);
             this.tsmiOpen.Text = "&Open...";
             this.tsmiOpen.Click += new System.EventHandler(this.tsmiOpen_Click);
             // 
@@ -150,7 +145,7 @@
             // 
             this.tsmiGet.Image = ((System.Drawing.Image)(resources.GetObject("tsmiGet.Image")));
             this.tsmiGet.Name = "tsmiGet";
-            this.tsmiGet.Size = new System.Drawing.Size(152, 22);
+            this.tsmiGet.Size = new System.Drawing.Size(142, 22);
             this.tsmiGet.Text = "&Get...";
             this.tsmiGet.Click += new System.EventHandler(this.tsmiGet_Click);
             // 
@@ -158,34 +153,34 @@
             // 
             this.tsmiOpenRecent.Image = ((System.Drawing.Image)(resources.GetObject("tsmiOpenRecent.Image")));
             this.tsmiOpenRecent.Name = "tsmiOpenRecent";
-            this.tsmiOpenRecent.Size = new System.Drawing.Size(152, 22);
+            this.tsmiOpenRecent.Size = new System.Drawing.Size(142, 22);
             this.tsmiOpenRecent.Text = "Open &Recent";
             // 
             // tsmiSave
             // 
             this.tsmiSave.Image = ((System.Drawing.Image)(resources.GetObject("tsmiSave.Image")));
             this.tsmiSave.Name = "tsmiSave";
-            this.tsmiSave.Size = new System.Drawing.Size(152, 22);
+            this.tsmiSave.Size = new System.Drawing.Size(142, 22);
             this.tsmiSave.Text = "&Save";
             this.tsmiSave.Click += new System.EventHandler(this.tsmiSave_Click);
             // 
             // tsmiSaveAs
             // 
             this.tsmiSaveAs.Name = "tsmiSaveAs";
-            this.tsmiSaveAs.Size = new System.Drawing.Size(152, 22);
+            this.tsmiSaveAs.Size = new System.Drawing.Size(142, 22);
             this.tsmiSaveAs.Text = "Save &As...";
             this.tsmiSaveAs.Click += new System.EventHandler(this.tsmiSaveAs_Click);
             // 
             // separator2
             // 
             this.separator2.Name = "separator2";
-            this.separator2.Size = new System.Drawing.Size(149, 6);
+            this.separator2.Size = new System.Drawing.Size(139, 6);
             // 
             // tsmiExit
             // 
             this.tsmiExit.Image = ((System.Drawing.Image)(resources.GetObject("tsmiExit.Image")));
             this.tsmiExit.Name = "tsmiExit";
-            this.tsmiExit.Size = new System.Drawing.Size(152, 22);
+            this.tsmiExit.Size = new System.Drawing.Size(142, 22);
             this.tsmiExit.Text = "E&xit";
             this.tsmiExit.Click += new System.EventHandler(this.tsmiExit_Click);
             // 
@@ -204,7 +199,6 @@
             this.tsmiEdit.Size = new System.Drawing.Size(39, 20);
             this.tsmiEdit.Text = "&Edit";
             this.tsmiEdit.DropDownOpening += new System.EventHandler(this.tsmiEdit_Opening);
-            this.tsmiEdit.DropDownOpened += new System.EventHandler(this.AnyDropDownOpened);
             // 
             // tsmiReindent
             // 
@@ -274,7 +268,6 @@
             this.tsmiHelp.Name = "tsmiHelp";
             this.tsmiHelp.Size = new System.Drawing.Size(44, 20);
             this.tsmiHelp.Text = "Help";
-            this.tsmiHelp.DropDownOpened += new System.EventHandler(this.AnyDropDownOpened);
             // 
             // tsmiBasicHelp
             // 
@@ -314,7 +307,6 @@
             // 
             // splitContainer3.Panel1
             // 
-            this.splitContainer3.Panel1.Controls.Add(this.btnExpandCollapse);
             this.splitContainer3.Panel1.Controls.Add(this.groupBox1);
             this.splitContainer3.Panel1.Controls.Add(this.tbXpath);
             this.splitContainer3.Panel1.Controls.Add(this.label2);
@@ -328,29 +320,6 @@
             this.splitContainer3.SplitterDistance = 85;
             this.splitContainer3.SplitterWidth = 6;
             this.splitContainer3.TabIndex = 0;
-            // 
-            // btnExpandCollapse
-            // 
-            this.btnExpandCollapse.BackColor = System.Drawing.Color.Transparent;
-            this.btnExpandCollapse.FlatAppearance.BorderSize = 0;
-            this.btnExpandCollapse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExpandCollapse.ImageIndex = 0;
-            this.btnExpandCollapse.ImageList = this.imageList1;
-            this.btnExpandCollapse.Location = new System.Drawing.Point(148, 30);
-            this.btnExpandCollapse.Name = "btnExpandCollapse";
-            this.btnExpandCollapse.Size = new System.Drawing.Size(12, 12);
-            this.btnExpandCollapse.TabIndex = 61;
-            this.btnExpandCollapse.TabStop = false;
-            this.toolTip1.SetToolTip(this.btnExpandCollapse, "Collapse");
-            this.btnExpandCollapse.UseVisualStyleBackColor = false;
-            this.btnExpandCollapse.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // imageList1
-            // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Fuchsia;
-            this.imageList1.Images.SetKeyName(0, "Collapse_small.bmp");
-            this.imageList1.Images.SetKeyName(1, "Expand_small.bmp");
             // 
             // groupBox1
             // 
@@ -510,7 +479,7 @@
             this.customTabControl1.Name = "customTabControl1";
             this.customTabControl1.Padding = new System.Drawing.Point(18, 0);
             this.customTabControl1.SelectedIndex = 0;
-            this.customTabControl1.Size = new System.Drawing.Size(538, 235);
+            this.customTabControl1.Size = new System.Drawing.Size(538, 225);
             this.customTabControl1.TabIndex = 86;
             this.customTabControl1.TabStop = false;
             this.customTabControl1.BeforeCloseTab += new System.EventHandler<Ionic.WinForms.BeforeCloseTabEventArgs>(this.customTabControl1_BeforeCloseTab);
@@ -522,7 +491,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 19);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(530, 212);
+            this.tabPage1.Size = new System.Drawing.Size(530, 202);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1   ";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -546,23 +515,25 @@
             this.richTextBox1.NumberLineCounting = Ionic.WinForms.RichTextBoxEx.LineCounting.CRLF;
             this.richTextBox1.NumberPadding = 2;
             this.richTextBox1.ShowLineNumbers = true;
-            this.richTextBox1.Size = new System.Drawing.Size(524, 206);
+            this.richTextBox1.Size = new System.Drawing.Size(524, 196);
             this.richTextBox1.TabIndex = 80;
             this.richTextBox1.Text = "";
             this.richTextBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.richTextBox1_KeyPress);
             this.richTextBox1.Leave += new System.EventHandler(this.richTextBox1_Leave);
             this.richTextBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.richTextBox1_MouseUp);
             // 
-            // timerMenu
+            // imageList1
             // 
-            this.timerMenu.Tick += new System.EventHandler(this.timerMenu_Tick);
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Fuchsia;
+            this.imageList1.Images.SetKeyName(0, "Collapse_small.bmp");
+            this.imageList1.Images.SetKeyName(1, "Expand_small.bmp");
             // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblStatus,
-            this.progressBar1,
-            this.linkToCodeplex});
+            this.progressBar1});
             this.statusStrip1.Location = new System.Drawing.Point(0, 354);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(538, 22);
@@ -572,7 +543,7 @@
             // lblStatus
             // 
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(257, 17);
+            this.lblStatus.Size = new System.Drawing.Size(421, 17);
             this.lblStatus.Spring = true;
             this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -581,15 +552,6 @@
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(100, 16);
             this.progressBar1.ToolTipText = "Highlight progress";
-            // 
-            // linkToCodeplex
-            // 
-            this.linkToCodeplex.IsLink = true;
-            this.linkToCodeplex.LinkBehavior = System.Windows.Forms.LinkBehavior.AlwaysUnderline;
-            this.linkToCodeplex.Name = "linkToCodeplex";
-            this.linkToCodeplex.Size = new System.Drawing.Size(164, 17);
-            this.linkToCodeplex.Text = "XPathVisualizer.codeplex.com";
-            this.linkToCodeplex.Click += new System.EventHandler(this.labelAsHyperlink_Click);
             // 
             // mnuXpathMru
             // 
@@ -623,6 +585,7 @@
             this.splitContainer3.Panel1.PerformLayout();
             this.splitContainer3.Panel2.ResumeLayout(false);
             this.splitContainer3.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.pnlInput.ResumeLayout(false);
@@ -668,7 +631,6 @@
         internal System.Windows.Forms.TextBox tbXmlns;
         internal System.Windows.Forms.TextBox tbPrefix;
         internal System.Windows.Forms.ToolStripProgressBar progressBar1;
-        internal System.Windows.Forms.ToolStripStatusLabel linkToCodeplex;
         internal System.Windows.Forms.ToolTip toolTip1;
         internal System.Windows.Forms.ToolStripMenuItem tsmiReindent;
         internal System.Windows.Forms.ToolStripMenuItem tsmiCopyAll;
@@ -680,7 +642,6 @@
         internal System.Windows.Forms.ToolStripMenuItem tsmiStripNamespaces;
         internal System.Windows.Forms.ToolStripMenuItem tsmiExtractHighlighted;
         internal System.Windows.Forms.ToolStripMenuItem tsmiRemoveSelected;
-        internal System.Windows.Forms.Button btnExpandCollapse;
         internal System.Windows.Forms.ImageList imageList1;
         internal System.Windows.Forms.Panel pnlInput;
         internal Ionic.WinForms.RepeatButton btn_PrevMatch;
@@ -688,7 +649,6 @@
         internal System.Windows.Forms.ContextMenuStrip mnuXpathMru;
         internal Ionic.WinForms.CustomTabControl customTabControl1;
         internal System.Windows.Forms.TabPage tabPage1;
-        internal System.Windows.Forms.Timer timerMenu;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
     }
 }

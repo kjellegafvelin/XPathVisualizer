@@ -122,7 +122,6 @@ namespace XPathVisualizer
             FillFormFromRegistry();
             KickoffColorizer();
             DisableMatchButtons();
-            SetupAutoHide();
         }
 
         private void UpdateStatus(string format, params object[] args)
@@ -377,7 +376,7 @@ namespace XPathVisualizer
         {
             this.FillFormFromRegistry();
             ClearTabs();
-            CollapseXmlnsPrefixPanel();
+            //CollapseXmlnsPrefixPanel();
 
             // process command line
             var args = Environment.GetCommandLineArgs();
@@ -824,7 +823,7 @@ namespace XPathVisualizer
             foreach (var t in mp)
             {
                 // do the highlight
-                richTextBox1.Select(t.V1, t.V2 - t.V1 + 1);
+                richTextBox1.Select(t.Item1, t.Item2 - t.Item1 + 1);
                 richTextBox1.SelectionBackColor = this.matchingEltColor;
             }
             return mp;
@@ -972,7 +971,7 @@ namespace XPathVisualizer
                     {
                         // Record the location of the match within the doc.
                         Trace("match({0},{1})", ix, ix2);
-                        matchPositions.Add(Tuple.New(ix, ix2));
+                        matchPositions.Add(Tuple.Create(ix, ix2));
                     }
                 }
             }
@@ -1032,19 +1031,6 @@ namespace XPathVisualizer
                 richTextBox1.EndUpdate();
             }
         }
-
-
-
-        private void labelAsHyperlink_Click(object sender, EventArgs e)
-        {
-            ToolStripStatusLabel lbl = sender as ToolStripStatusLabel;
-            if (lbl == null) return;
-            var t= lbl.Text;
-            if (!t.StartsWith("http:/") && !t.StartsWith("https:/"))
-                t = "http://" + t;
-            System.Diagnostics.Process.Start(t);
-        }
-
 
         private static System.Text.RegularExpressions.Regex re1 =
             new System.Text.RegularExpressions.Regex("Namespace prefix '(.+)' is not defined");
@@ -1369,9 +1355,9 @@ namespace XPathVisualizer
 
         private void ProperlyDisplayXmlnsPrefixPanel()
         {
-            if ((tabState == null) || (!tabState.xmlnsTableIsExpanded))
-                CollapseXmlnsPrefixPanel();
-            else
+            //if ((tabState == null) || (!tabState.xmlnsTableIsExpanded))
+            //    CollapseXmlnsPrefixPanel();
+            //else
                 ExpandXmlnsPrefixPanel();
 
         }
@@ -1381,18 +1367,11 @@ namespace XPathVisualizer
             int n = (this.groupBox1.Controls.Count -1 )/ 4;
             int offsetY = 2;  // greater implies larger panel
 
-            //this.pnlPrefixList.Visible = true;
-                    foreach (Control c in this.groupBox1.Controls)
-                    {
-                        c.Visible = true;
-                    }
+            foreach (Control c in this.groupBox1.Controls)
+            {
+                c.Visible = true;
+            }
 
-                    //this.pnlInput.Visible = true;
-            btnExpandCollapse.ImageIndex = 0;
-            this.toolTip1.SetToolTip(this.btnExpandCollapse, "Collapse");
-            //this.splitContainer3.Panel1MinSize = originalPanel1MinSize + (XmlNsPanelDeltaY * n) + offsetY;
-            //var sz = this.pnlPrefixList.Size;
-            //this.pnlPrefixList.Size = new Size(sz.Width, 2 + (XmlNsPanelDeltaY * n) + offsetY);
             this.splitContainer3.Panel1MinSize = 70 + (XmlNsPanelDeltaY * n) + offsetY;
             this.splitContainer3.SplitterDistance = this.splitContainer3.Panel1MinSize;
 
@@ -1411,15 +1390,11 @@ namespace XPathVisualizer
 
         private void CollapseXmlnsPrefixPanel()
         {
-            //this.pnlPrefixList.Visible = false;
             foreach (Control c in this.groupBox1.Controls)
             {
-                c.Visible = false;
+//                c.Visible = false;
             }
 
-            //this.pnlInput.Visible = false;
-            btnExpandCollapse.ImageIndex = 1;
-            this.toolTip1.SetToolTip(this.btnExpandCollapse, "Expand");
             this.splitContainer3.Panel1MinSize = originalPanel1MinSize - (XmlNsPanelDeltaY);
             this.splitContainer3.SplitterDistance = this.splitContainer3.Panel1MinSize;
             if (tabState != null)
@@ -1433,9 +1408,9 @@ namespace XPathVisualizer
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (this.pnlInput.Visible == true)
-                CollapseXmlnsPrefixPanel();
-            else
+            //if (this.pnlInput.Visible == true)
+            //    CollapseXmlnsPrefixPanel();
+            //else
                 ExpandXmlnsPrefixPanel();
         }
 
@@ -1551,9 +1526,9 @@ namespace XPathVisualizer
             Tuple<int, int> position = tabState.matches[tabState.currentMatch];
 
             Trace("scrollToCurrentMatch(curmatch({0}) position({1},{2}))",
-                  tabState.currentMatch, position.V1, position.V2);
+                  tabState.currentMatch, position.Item1, position.Item2);
 
-            int startLine = richTextBox1.GetLineFromCharIndex(position.V1);
+            int startLine = richTextBox1.GetLineFromCharIndex(position.Item1);
 
             Trace("scrollToCurrentMatch::startLine({0}) numVisibleLines({1})",
                   startLine, tabState.numVisibleLines);
@@ -1563,10 +1538,10 @@ namespace XPathVisualizer
             if (prior >= 0)
             {
                 Tuple<int, int> p2 = tabState.matches[prior];
-                richTextBox1.Select(p2.V1, p2.V2 - p2.V1 + 1);
+                richTextBox1.Select(p2.Item1, p2.Item2 - p2.Item1 + 1);
                 richTextBox1.SelectionBackColor = this.matchingEltColor;
             }
-            richTextBox1.Select(position.V1, position.V2 - position.V1 + 1);
+            richTextBox1.Select(position.Item1, position.Item2 - position.Item1 + 1);
             richTextBox1.SelectionBackColor = this.kindaPink;
 
             // If the start line is in the middle of the doc...
@@ -1585,7 +1560,7 @@ namespace XPathVisualizer
             richTextBox1.ScrollToCaret();
 
             // restore selection:
-            richTextBox1.Select(position.V1, 0);
+            richTextBox1.Select(position.Item1, 0);
         }
 
 
@@ -1631,63 +1606,6 @@ namespace XPathVisualizer
         }
 
 
-        protected override void OnKeyUp(KeyEventArgs e)
-        {
-            // workitem 6720
-            // if (e.Alt && e.KeyCode == Keys.F4)
-            // {
-            //     // do nothing - normal handling (form exit)
-            // }
-            // else if (e.Alt && e.KeyCode == Keys.F)
-            // {
-            // }
-            // else if (e.Alt && e.KeyCode == Keys.E)
-            // {
-            // }
-            // else if (e.Alt && e.KeyCode == Keys.H)
-            // {
-            // }
-            // else if (e.Alt)
-
-            if (e.KeyData == Keys.Menu)
-            {
-                // If the menu has just changed state, do not change back.
-                // force a bit of a delay.
-                if (this._lastEventWasAlt && this._intTicks <= 1)
-                    return;
-
-                this._intTicks = 0;
-                // toggle
-                if (menuStrip1.Visible)
-                {
-                    this._lastMenuItemIndex = menuStrip1.FindSelectedIndex();
-                    this.menuStrip1.Visible = false;
-                    this._lastEventWasAlt = false;
-                }
-                else
-                {
-                    if (this._lastMenuItemIndex == -1) this._lastMenuItemIndex = 0;
-                    this.menuStrip1.Visible = true;
-                    this.menuStrip1.Focus();
-                    this.menuStrip1.Items[this._lastMenuItemIndex].Select();
-                    this._lastEventWasAlt = true;
-                }
-                e.Handled = true;
-                return;
-            }
-            this._lastEventWasAlt = false;
-        }
-
-        void DropDownOneSubmenu(int ix)
-        {
-            this.menuStrip1.Visible = true;
-            this._lastMenuItemIndex = ix;
-            this.menuStrip1.Focus();
-            this.menuStrip1.Items[ix].Select();
-            ((ToolStripDropDownItem) this.menuStrip1.Items[ix]).ShowDropDown();
-            this._lastEventWasAlt = true;
-        }
-
         // see http://stackoverflow.com/questions/2434834/processcmdkey-wait-for-keyup/2435190#2435190
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
@@ -1702,55 +1620,9 @@ namespace XPathVisualizer
                 return true;
             }
 
-            // Each of the next three cases handles a shortcut key for a
-            // menu item.  The shortcuts don't "just work" when I do
-            // auto-hiding of the menustrip.  So I have to pop the menustrip
-            // and dropdown the menuitem explicitly.
-            if (keyData == (Keys.Alt | Keys.F))
-            {
-                DropDownOneSubmenu(0);
-                return true;
-            }
-            if (keyData == (Keys.Alt | Keys.E))
-            {
-                DropDownOneSubmenu(1);
-                return true;
-            }
-            if (keyData == (Keys.Alt | Keys.H))
-            {
-                DropDownOneSubmenu(2);
-                return true;
-            }
-
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
-
-        #if NOT
-        protected override void OnKeyDown(KeyEventArgs e)
-        {
-            // Because Form.KeyPreview is true, this method gets invoked before
-            // the KeyDown event is passed to the control with focus.  This way we
-            // can handle keydown events on a form-wide basis.
-            if (e.Control && e.KeyCode == Keys.N)
-            {
-                // ctrl-N - next match
-                btn_NextMatch_Click(this, null);
-                e.Handled = true;
-            }
-            else if (e.Control && e.KeyCode == Keys.P)
-            {
-                // ctrl-P - previous match
-                btn_PrevMatch_Click(this, null);
-                e.Handled = true;
-            }
-            else if (e.KeyCode == Keys.Menu)
-            {
-                Console.WriteLine("KeyDown: ALT");
-                e.Handled = true;
-            }
-        }
-        #endif
 
         /// <summary>
         /// Deletes the selected nodes in the XML RichTextBox, given the XPathNodeIterator.
@@ -1768,10 +1640,10 @@ namespace XPathVisualizer
             foreach (var t in tabState.matches)
             {
                 // do the deletion
-                Trace("DeleteSelection(match({0},{1}))", t.V1, t.V2);
+                Trace("DeleteSelection(match({0},{1}))", t.Item1, t.Item2);
 
-                int start = t.V1 - totalRemoved;
-                int length = t.V2 - t.V1 + 1;
+                int start = t.Item1 - totalRemoved;
+                int length = t.Item2 - t.Item1 + 1;
                 if (start < 0) continue;
                 richTextBox1.Select(start, length);
                 richTextBox1.SelectedText = "";
@@ -1828,8 +1700,8 @@ namespace XPathVisualizer
                 foreach (var m in tabState.matches)
                 {
                     // do the extraction
-                    int start = m.V1;
-                    int length = m.V2 - m.V1 + 1;
+                    int start = m.Item1;
+                    int length = m.Item2 - m.Item1 + 1;
                     if (start < 0) continue;
                     Match match = null;
                     richTextBox1.Select(start, length);
@@ -2368,117 +2240,6 @@ namespace XPathVisualizer
             ab.AppDetailsButton = true;
             ab.ShowDialog(this);
         }
-
-#region Menu Auto Hide
-        // workitem 6720 - auto-hide of menu
-        private void SetupAutoHide()
-        {
-            SetupAutoHide(true);
-        }
-        private void SetupAutoHide(bool wantReset)
-        {
-            this.menuStrip1.Visible = false;
-            this.timerMenu.Enabled = true; // receive ticks
-            #if AUTOHIDE
-            this.aMainMenuItemIsDropped = false;
-            #endif
-            this._lastEventWasAlt = false;
-            this._intTicks = 0;
-            if (wantReset)
-                this._lastMenuItemIndex = -1;
-        }
-
-        private void menuStrip1_MenuActivate(object sender, EventArgs e)
-        {
-            // reset the count, so we know when to hide the menu
-            this._intTicks = 0;
-        }
-
-        private void AnyDropDownOpened(object sender, EventArgs e)
-        {
-            #if AUTOHIDE
-            this.aMainMenuItemIsDropped = true;
-            #endif
-            var mi = sender as ToolStripMenuItem;
-            if (mi != null)
-            {
-                this._lastMenuItemIndex = mi.Index();
-            }
-        }
-        private void AnyDropDownClosed(object sender, EventArgs e)
-        {
-            #if AUTOHIDE
-            this.aMainMenuItemIsDropped = false;
-            #endif
-        }
-
-        private void menuStrip1_MenuDeactivate(object sender, EventArgs e)
-        {
-            SetupAutoHide(false);
-            this._lastEventWasAlt = true;
-            this._intTicks = 0;
-        }
-
-        private void timerMenu_Tick(object sender, EventArgs e)
-        {
-            #if AUTOHIDE
-
-            // At one point I had enabled Autohide of the top
-            // menustrip. The way it worked: if you hovered your mouse
-            // over where the menustrip was supposed to be, it would
-            // appear. If you moved your mose away, it would disappear,
-            // after a short delay.
-            //
-            // In practice, it turned out to annoying. Sometimes it
-            // would unexpectedly pop up. Then it would go away
-            // magically. In order to uphold the principle of least
-            // astonishment, I removed the feature.
-
-            if (menuStrip1.Visible)
-            {
-                // if any of the popdown menus are visible, suppress autohide
-                if (aMainMenuItemIsDropped)
-                    return;
-
-                Point ptCursor = PointToClient(MousePosition);
-                // If the cursor on the menu, or as much as 2 pixels
-                // below the menu
-                if (ptCursor.Y <= (menuStrip1.Size.Height + 2))
-                    return;
-
-                if (this._intTicks >= 13)
-                {
-                    menuStrip1.Visible = false; // hide
-                    this._intTicks = 0;  // reset counter
-                }
-                else
-                {
-                    this._intTicks++;
-                }
-            }
-            else
-            {
-                // Retrieve the current mouse position relative to the form
-                Point ptCursor = PointToClient(MousePosition);
-                // If the cursor is within the menu area
-                if ((ptCursor.Y <= menuStrip1.Size.Height) & (ptCursor.Y > 0))
-                {
-                    if (this._intTicks >= 2)
-                    {
-                        menuStrip1.Visible = true;
-                        this._intTicks = 0;
-                    }
-                    else
-                    {
-                        this._intTicks++;
-                    }
-                }
-            }
-            #else
-            this._intTicks++;
-            #endif
-        }
-        #endregion
 
     }
 
